@@ -15,7 +15,7 @@ pb = pyrebase.initialize_app(json.load(open("conf/init.json")))
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
-
+    
     if email is None or password is None:
         return {'message': 'Error missing email or password'}, 400
     
