@@ -1,9 +1,17 @@
 from app.models.user import User
 
 class UserService():
-    def get_all_users(self, db):
-        users = db.collection(u'hackeps-2019').document(u'prod').collection(u'users').get()
+
+    def __init__(self, db):
+        self.firestore = db
+
+    def get_all_users(self):
+        users = self.firestore.collection('hackeps-2019').document('prod').collection('users').get()
         return list(map(lambda x: self._to_filtered_dict(x), users))
+
+    def update_user_status(self, user_uid, status):
+        user = self.firestore.collection('hackeps-2019').document('dev').collection('users').document(user_uid).update({"accepted": status})
+        return user is not None
 
     def _to_filtered_dict(self, user):
         user = user.to_dict()

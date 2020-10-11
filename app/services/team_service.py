@@ -1,7 +1,11 @@
 
 class TeamService():
-    def get_all_teams(seldf, db, users):
-        teams = db.collection(u'hackeps-2019').document(u'prod').collection(u'teams').get()
+
+    def __init__(self, db):
+        self.firestore = db
+
+    def get_all_teams(self, users):
+        teams = self.firestore.collection(u'hackeps-2019').document(u'prod').collection(u'teams').get()
         team_list = list()
         
         for team in teams:
