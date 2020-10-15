@@ -77,7 +77,7 @@ def get_users():
     except:
         return {'message': 'Error retrieving users'}, 400
 
-@app.route("/users/update/<string:user_id>", methods=['PATCH'])
+@app.route("/users/update/<string:user_id>", methods=['POST'])
 @check_token
 def update_user_status(user_id):
     try:
