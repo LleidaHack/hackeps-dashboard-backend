@@ -10,7 +10,7 @@ class UserService():
         return list(map(lambda x: self._to_filtered_dict(x), users))
 
     def update_user_status(self, user_uid, status):
-        user = self.firestore.collection('hackeps-2019').document('dev').collection('users').document(user_uid).update({"accepted": status})
+        user = self.firestore.collection('hackeps-2019').document('prod').collection('users').document(user_uid).update({"accepted": status})
         return user is not None
 
     def _to_filtered_dict(self, user):
