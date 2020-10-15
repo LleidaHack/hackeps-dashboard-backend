@@ -34,7 +34,7 @@ def check_token(f):
         return f(*args, **kwargs)
     return wrap
 
-@app.route("/login", methods=['GET']) 
+@app.route("/login", methods=['POST']) 
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
