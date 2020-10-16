@@ -65,7 +65,6 @@ def refresh_token():
         user = authentication_service.refresh_token(request.form.get('refresh_token'))
         return {'user': user}, 200
     except:
-        print(sys.exc_info())
         return {'message': 'Error refreshing token'}, 400
 
 @app.route("/users", methods=['GET'])
