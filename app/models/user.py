@@ -10,6 +10,7 @@ class User():
         terms = True
         status = Status.PERHAPS
         shirt_size = ''
+        photo_url = ''
 
     def to_dict(self):
         user_dict = {
@@ -20,7 +21,8 @@ class User():
             'gdpr': self.gdpr,
             'terms': self.terms,
             'status': self.status,
-            'shirt_size': self.shirt_size
+            'shirt_size': self.shirt_size,
+            'photo_url': self.photo_url
         }
         return user_dict
 
@@ -35,4 +37,5 @@ class User():
         user.terms = user_dict['terms']
         user.status = Status.get_status_from_string(user_dict['accepted'])
         user.shirt_size = user_dict['shirtSize']
+        user.photo_url = user_dict['photoURL']
         return user

@@ -5,7 +5,7 @@ class TeamService():
         self.firestore = db
 
     def get_all_teams(self, users):
-        teams = self.firestore.collection(u'hackeps-2019').document(u'prod').collection(u'teams').get()
+        teams = self.firestore.collection(u'hackeps-2020').document(u'prod').collection(u'teams').get()
         team_list = list()
         
         for team in teams:
