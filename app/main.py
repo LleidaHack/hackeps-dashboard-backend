@@ -57,7 +57,7 @@ def reset_password():
     except:
         return {'message': 'Error resseting password from email'}, 400
 
-@app.route("/refresh_token", methods=['GET'])
+@app.route("/refresh_token", methods=['POST'])
 @check_token
 def refresh_token():
     try:
