@@ -58,7 +58,6 @@ def reset_password():
         return {'message': 'Error resseting password from email'}, 400
 
 @app.route("/refresh_token", methods=['POST'])
-@check_token
 def refresh_token():
     try:
         user = authentication_service.refresh_token(request.form.get('refresh_token'))
