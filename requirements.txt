@@ -3,3 +3,4 @@ gunicorn
 firebase_admin
 requests
 pyrebase
+flask_cors
