@@ -1,6 +1,7 @@
 from firebase_admin import credentials, firestore, initialize_app, auth
 from functools import wraps
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from app.services.user_service import UserService
 from app.services.team_service import TeamService
 from app.services.authentication_service import AuthenticationService
@@ -9,7 +10,7 @@ import json
 import sys
 
 app = Flask(__name__) 
-
+CORS(app)
 # Firebase variables initializers
 cred = credentials.Certificate("conf/key.json")
 firebase = initialize_app(cred)
@@ -34,7 +35,7 @@ def check_token(f):
         return f(*args, **kwargs)
     return wrap
 
-@app.route("/login", methods=['GET']) 
+@app.route("/login", methods=['POST']) 
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -58,14 +59,12 @@ def reset_password():
     except:
         return {'message': 'Error resseting password from email'}, 400
 
-@app.route("/refresh_token", methods=['GET'])
-@check_token
+@app.route("/refresh_token", methods=['POST'])
 def refresh_token():
     try:
         user = authentication_service.refresh_token(request.form.get('refresh_token'))
         return {'user': user}, 200
     except:
-        print(sys.exc_info())
         return {'message': 'Error refreshing token'}, 400
 
 @app.route("/users", methods=['GET'])
@@ -77,7 +76,7 @@ def get_users():
     except:
         return {'message': 'Error retrieving users'}, 400
 
-@app.route("/users/update/<string:user_id>", methods=['PATCH'])
+@app.route("/users/update/<string:user_id>", methods=['POST'])
 @check_token
 def update_user_status(user_id):
     try:
