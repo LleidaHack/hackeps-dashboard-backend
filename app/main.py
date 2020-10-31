@@ -1,6 +1,8 @@
 from firebase_admin import credentials, firestore, initialize_app, auth
 from functools import wraps
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+logging.getLogger('flask_cors').level = logging.DEBUG
 from app.services.user_service import UserService
 from app.services.team_service import TeamService
 from app.services.authentication_service import AuthenticationService
@@ -9,6 +11,7 @@ import json
 import sys
 
 app = Flask(__name__) 
+CORS(app)
 # Firebase variables initializers
 cred = credentials.Certificate("conf/key.json")
 firebase = initialize_app(cred)
